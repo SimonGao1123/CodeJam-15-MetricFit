@@ -1,0 +1,27 @@
+/* .sign-in-display {
+    background-color: #ffc0cb;
+    display: flex;
+    flex-direction: column;
+    position: fixed; 
+
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+} */
+
+.sign-in-display label{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.sign-in-display2 {
+    background-color: #ffc0cb;
+    display: flex;
+    flex-direction: column;
+    position: fixed; 
+
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

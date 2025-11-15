@@ -19,7 +19,7 @@ function UserLoginDisplay ({setDisplayLogin, setUserLoggedIn}) {
         clearAllEntries(setLoginUser, setLoginPass, setRegPass, setRegPass, setConfRegPass);
     }, [ifLoginDisplay]); // if login/register display changes then reset the display message
     return (
-        <>
+        <div className="sign-in-display2">
             {ifLoginDisplay 
             ? <LoginDisplay 
             loginUser={loginUser} 
@@ -47,9 +47,9 @@ function UserLoginDisplay ({setDisplayLogin, setUserLoggedIn}) {
             setLoginPass={setLoginPass}
             setLoginUser={setLoginUser}/>
             }
-
+            
             <p>{displayMessage}</p>
-        </>
+            </div>
 
     );
 }
@@ -85,7 +85,7 @@ function LoginDisplay ({loginUser, setLoginUser, loginPass, setLoginPass, setLog
     } 
 
     return (
-        <>
+        <div className="sign-in-display">
             <h2>Login</h2>
             <form onSubmit={handleLoginSubmission}>
                 <label htmlFor="user-login-input">Enter Username: </label>
@@ -97,7 +97,7 @@ function LoginDisplay ({loginUser, setLoginUser, loginPass, setLoginPass, setLog
             </form>
 
             <p>Don't have an account? <button onClick={() => setLoginDisplay(false)}>Register Here</button></p>
-        </>
+        </div>
     );
 }
 
@@ -127,7 +127,7 @@ function RegisterDisplay ({regUser, setRegUser, regPass, setRegPass, confRegPass
             console.log("Error when receiving response for registration " + error);
         });
     }
-    return (<>
+    return (<div className="sign-in-display">
             <h2>Register</h2>
             <form onSubmit={handleRegisterSubmit}>
                 <label htmlFor="user-register-input">Enter Username: </label>
@@ -142,7 +142,7 @@ function RegisterDisplay ({regUser, setRegUser, regPass, setRegPass, confRegPass
 
             <p>Have an account? <button onClick={() => setLoginDisplay(true)}>Login Here</button></p>
 
-        </>);
+        </div>);
 }
 
 export default UserLoginDisplay
