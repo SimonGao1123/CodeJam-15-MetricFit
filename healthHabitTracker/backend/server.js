@@ -8,3 +8,5 @@ app.use(cors());
 app.use("/", loginRoutes);
 
 app.listen(3000, () => console.log("Server has started"));
+
+
