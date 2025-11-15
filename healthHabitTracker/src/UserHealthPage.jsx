@@ -2,6 +2,36 @@ import './UserHealthPage.css'
 import { useState } from 'react'
 import {useEffect} from 'react'
 
+
+// var currentDay = new Date();
+// var dayWeek = currentDay.getDay(); // Sunday - Saturday : 0 - 6
+// var dayMonth = currentDay.getDate(); // 1 - 31
+// // retrieve last logged date
+
+// console.log(currentDay)
+// var currentDay = new Date(currentDay.getFullYear(), currentDay.getMonth(), currentDay.getDate());
+// console.log(currentDay)
+
+
+// function 
+function updateClock() {
+    var tempDate = new Date();
+    var tempDate = new Date(tempDate.getFullYear(), tempDate.getMonth(), tempDate.getDate());
+    if (currentDay.getMonth() != tempDate.getMonth() || currentDay.getFullYear() != currentDay.getFullYear())
+        {
+            // updateLeaderboard()
+        }
+    var startWeek1 = new Date(currentDay.getFullYear(), currentDay.getMonth(), currentDay.getDate() - currentDay.getDay())
+    var startWeek2 = new Date(tempDate.getFullYear(), tempDate.getMonth(), tempDate.getDate() - currentDay.getDay)
+    if (startWeek1.getTime() === startWeek2.getTime())
+        {
+            // updateStreak()
+        }
+    var currentDay = tempDate;
+    var dayWeek = currentDay.getDay(); // Sunday - Saturday : 0 - 6
+    var dayMonth = currentDay.getDate(); // 1 - 31
+}
+
 function UserHealthPage ({userLoggedIn, setUserLoggedIn, setDisplayLogin}) {
     const {weight, sex, age, height} = userLoggedIn;
 
@@ -13,8 +43,25 @@ function UserHealthPage ({userLoggedIn, setUserLoggedIn, setDisplayLogin}) {
 
     const [menuShown, setMenuShown] = useState(!sex);
 
-    console.log("Height: " + updateHeight + ", Weight" + updateWeight + ", Sex" + updateSex + ", Age" + updateAge);
-    // function askAI () {
+    const [pastDate, updatePastDate] = useState(null);
+
+    function getPrevTime () {
+    fetch("http://localhost:3000/getDate", {
+            method: "GET",
+        }).then(res => res.text())
+        .then(data => updatePastDate(data))
+        .catch(error => {
+            console.log("Error in adding user information: " + error);
+            return null;
+        })   
+    }
+    
+    useEffect(() => {
+        getPrevTime();
+    }, [])
+    console.log(pastDate);
+
+   // function askAI () {
     //     fetch("http://localhost:3000/api/chat", {
     //         method: "POST",
     //         headers: {"Content-Type": "application/json"},

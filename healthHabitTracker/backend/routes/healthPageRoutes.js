@@ -3,6 +3,7 @@ import fs from 'fs';
 
 const router = express.Router();
 const userInfoPath  = "./dataFiles/userInfo.json"
+const timeInfoPath = "./dataFiles/timeinfo.txt"
 
 // only call when registering a new user
 router.post("/addUser", (req, res) => {
@@ -76,5 +77,26 @@ function writeUserInfo (newData) {
         console.error("Error occurred while writing Login info: " + error);
     }
 }
+
+
+function readTimeInfo () {
+    try {
+        return fs.readFileSync(timeInfoPath, "utf-8");
+
+    } catch (error) {
+        console.error("Error occurred while reading Time info: " + error);
+    }
+}
+
+    router.get("/getDate", (req, res) => {
+    try {
+        const timedata = readTimeInfo();
+        console.log(timedata);
+        res.send(timedata);
+        
+    } catch(error) {
+        console.error("error in obtaining time " + error);
+    }
+})
 
 export default router;
