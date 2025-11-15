@@ -1,8 +1,8 @@
 body {
-  background-color: rgb(209, 205, 255);
+  background-color: rgb(54, 53, 53);
   background-image: url('./1_background.png');
   background-repeat: repeat;
-  background-size: 2100px;       /* or contain / cover / 300px etc */
+  background-size: 1500px;       /* or contain / cover / 300px etc */
 
   /* Manual positioning options */
   background-position: 0px -676px;   

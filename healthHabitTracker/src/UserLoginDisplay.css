@@ -40,7 +40,7 @@
     padding: 30px 70px;
     font-size: 1.5rem;
     border-radius: 40px;
-    box-shadow: 5px 5px 15px gray;
+    
     transition: padding 0.3s ease;
 }
 
@@ -60,7 +60,7 @@
     padding-left: 7px;
     padding-right: 7px;
     background-color: rgb(240, 240, 240);
-
+    font-family: 'Momo Trust Display', serif;;
 }
 
 .text input:focus {
