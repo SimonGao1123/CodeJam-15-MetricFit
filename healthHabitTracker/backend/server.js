@@ -10,3 +10,5 @@ app.use("/", loginRoutes);
 app.use("/", healthPageRoutes)
 
 app.listen(3000, () => console.log("Server has started"));
+
+
