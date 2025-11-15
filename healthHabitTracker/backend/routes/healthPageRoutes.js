@@ -10,7 +10,7 @@ router.post("/addUser", (req, res) => {
         const {username, id} = req.body;
 
         const data = readUserInfo();
-        const newData = {username, id, streak: 0, weight: 0, sex: null, age: 0, height: 0, weeklyCalendar: [], weeklyCaloriesBurnt: 0, totalCaloriesBurnt: 0};
+        const newData = {username, id, streak: 0, weight: 0, sex: null, age: 0, height: 0, weeklyCalendar: Array.from({ length: 7 }, () => []), weeklyCaloriesBurnt: 0, totalCaloriesBurnt: 0};
         data.push(newData);
         writeUserInfo(data);
     } catch (error) {

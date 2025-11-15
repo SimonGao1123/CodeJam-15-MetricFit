@@ -16,6 +16,7 @@ const defaultWeightTemplate = {
         workout_title: ""
     };
 function UserHealthPage ({userLoggedIn, setUserLoggedIn, setDisplayLogin}) {
+    const [weeklyCalendar, setWeeklyCalendar] = useState(userLoggedIn.weeklyCalendar); 
     const {weight, sex, age, height} = userLoggedIn;
 
     // const [aiMessage, setAIMessage] = useState("");
@@ -76,6 +77,7 @@ function UserHealthPage ({userLoggedIn, setUserLoggedIn, setDisplayLogin}) {
             workoutInputs={workoutInputs}
             setWorkOutInputs={setWorkOutInputs}/>
 
+            
             <button onClick={() => signOutFunction(setUserLoggedIn, setDisplayLogin)}>Sign out</button>
 
             <button onClick={() => console.log(caloriesBurnt(workoutInputs, updateWeight, updateHeight, updateAge, updateSex, workoutCategory, workoutIntensity))}>Get Calories Burnt</button>
