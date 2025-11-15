@@ -9,9 +9,9 @@ app.use(express.json());
 app.use(cors());
 app.use("/", loginRoutes);
 app.use("/", geminiRoutes);
+app.use("/", healthPageRoutes)
 
 
 app.listen(3000, () => console.log("Server has started"));
 
-app.use("/", healthPageRoutes)
 

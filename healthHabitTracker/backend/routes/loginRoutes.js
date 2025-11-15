@@ -28,7 +28,7 @@ router.post("/register", (req, res) => {
         const {username, password} = req.body;
         const pastData = readLoginInfo();
         if (!ifUserValid(pastData, username)) {
-            return res.json({message: 'Username already exists, please try again.', success: false});
+            return res.json({message: 'Username already exists, please try again.', id: null, success: false});
         }
         id++;
         
@@ -36,10 +36,10 @@ router.post("/register", (req, res) => {
         newData.push({username: username, password: encryptPassword(password), id: `${username}-${id}`});
 
         writeLoginInfo(newData);
-        res.send({message: `registered ${username}`, success: true});
+        res.send({message: `registered ${username}`, username:username, id: `${username}-${id}`, success: true});
     } catch (error) {
         console.log("Error in registration process " + error);
-        res.send({message: `failed to register ${username}`, success: false});
+        res.send({message: `failed to register ${username}`, id: null, success: false});
 
     }
 

@@ -6,7 +6,6 @@ function App() {
   const [displayLogin, setDisplayLogin] = useState(true);
   const [userLoggedIn, setUserLoggedIn] = useState({}); // will hold username + id
   // id will be used to access data stored for user
-  console.log(displayLogin);
   console.log(userLoggedIn);
   return (
   <>
