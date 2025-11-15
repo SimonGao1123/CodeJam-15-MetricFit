@@ -31,7 +31,6 @@ router.post("/register", (req, res) => {
             return res.json({message: 'Username already exists, please try again.', success: false});
         }
         id++;
-
         
         const newData = pastData ? pastData : [];
         newData.push({username: username, password: encryptPassword(password), id: `${username}-${id}`});
