@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Gloock&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Momo+Trust+Display&display=swap');
+
+.main {
+    font-family: 'Momo Trust Display', serif;
+    position: fixed;
+    top: 50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+}
+
+.text label{
+    display: flex;
+    flex-direction: column;
+    text-align: flex;
+    
+}
+
+.text button {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.text button:hover{
+    background-color: rgb(240, 240, 240);
+    padding: 12px;
+    transition : background-color, padding 0.3s ease;
+    
+}
+
+.text button {
+     font-family: 'Momo Trust Display', serif;;
+}
+
+.container {
+    position: relative;
+    background-color: #ffffff;
+    padding: 30px 70px;
+    font-size: 1.5rem;
+    border-radius: 40px;
+    box-shadow: 5px 5px 15px gray;
+    transition: padding 0.3s ease;
+}
+
+/* .username-false-display p{
+    color: green;
+    position:absolute;
+    top: 500px;
+    
+} */
+
+.text input{
+    width: 500px;
+    height: 30px;
+    border-radius: 10px;
+    border-width: 0px;
+    margin-bottom: 15px;
+    padding-left: 7px;
+    padding-right: 7px;
+    background-color: rgb(240, 240, 240);
+
+}
+
+.text input:focus {
+  outline: none;
+  font-family: 'Momo Trust Display', serif;
+}
+
+.text button{
+    padding: 8px;
+    transition: padding 0.2s ease;
+    appearance: none;
+    border: none;
+    border-radius: 10px;
+    background-color: rgb(240, 240, 240);
+}
+
+.message-box {
+    max-height: 0;             
+    opacity: 0;
+    overflow: hidden;           
+    font-size: 1.4rem;
+
+    transition:
+        max-height 0.35s ease,
+        opacity 0.35s ease;
+}
+
+.message-box.show {
+    max-height: 100px;         
+    opacity: 1;
+}
+
