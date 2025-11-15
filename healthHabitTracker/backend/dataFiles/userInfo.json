@@ -1,0 +1,14 @@
+[
+  {
+    "username": "12345",
+    "id": "12345-1",
+    "streak": 0,
+    "weight": 0,
+    "sex": null,
+    "age": 0,
+    "height": 0,
+    "weeklyCalendar": [],
+    "weeklyCaloriesBurnt": 0,
+    "totalCaloriesBurnt": 0
+  }
+]

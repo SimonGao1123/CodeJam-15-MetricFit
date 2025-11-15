@@ -13,5 +13,10 @@
     "username": "can",
     "password": "f5ec89ba4413f79c599c9510854f287c:f436acaf01ebb2d0d2046ef9c51e433b1660658d66e18e5750673fe0b13cfb8d08ea1548320d5393ea9c73f669fbd1eb2ddf80db8f26a6fb0dd97ff9b48ec5e9",
     "id": "can-1"
+  },
+  {
+    "username": "12345",
+    "password": "0218931eed0723866c672ca6079db2ae:9daa38bd87802f99489dfd69d968201d806800811b3aa6d1517fa26f82dc08c5cb4bd85d9286b5735f110c7222bdc738d7ed8f28debc8e42e06009347dc31cad",
+    "id": "12345-1"
   }
 ]
