@@ -1,5 +1,6 @@
 [
   {
+<<<<<<< HEAD
     "username": "",
     "password": "431613ccfe933717d34ba65efb22a117:d89e831f9537e6a26d7a5c7e7e53c0d6d6fc3520ffa5c9607090033df9dcc36088f5eb6c2d3b49fd40b70f6c1be3e2f972e02c6a0ff95864661586fdd515fe1a",
     "id": "-1"
@@ -18,5 +19,10 @@
     "username": "frefref",
     "password": "3e3ec779d4878e64982bcfe875acf8ff:c4ee1d7c81423fcc21eeb589754fde3215cd2c6bc6bb25f66631c00570ebf40cad468333d2974400a8adef4e90ba1b941df50361a3cc28f40df68fdf1f110345",
     "id": "frefref-4"
+=======
+    "username": "s",
+    "password": "dec2db4fdcda304f90faab8972717329:80319773719fc19a76db6e7dd28f6fee914e0abe48750826e46c947da03becf27cb9f39eafd3fe38cc6b3d2974adbe1f3a8485fe5c1d15b03533a5a70159339e",
+    "id": "s-1"
+>>>>>>> fc1c3d6 (troubleshooting for gemini backend)
   }
 ]
