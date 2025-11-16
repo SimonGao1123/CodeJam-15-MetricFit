@@ -109,7 +109,7 @@ function UserHealthPage ({userLoggedIn, setUserLoggedIn, setDisplayLogin}) {
     }
 
     function StreakUpdate(updateStreak,weeklyCalendar,userLoggedIn) {
-        // console.log(weeklyCalendar)
+        console.log(weeklyCalendar)
         if (weeklyCalendar.flat().length === 0){
             updateStreak = 0
         } else {
@@ -126,7 +126,7 @@ function UserHealthPage ({userLoggedIn, setUserLoggedIn, setDisplayLogin}) {
 
     return (
         <>
-            <button onClick={() => updateClock()}>Update Day</button>
+            <button onClick={() => updateClock(streak, weeklyCalendar, userLoggedIn)}>Update Day</button>
             <h2>Hello {userLoggedIn.username}</h2>
 
             <button onClick={() => setMenuShown(!menuShown)}>☰</button>

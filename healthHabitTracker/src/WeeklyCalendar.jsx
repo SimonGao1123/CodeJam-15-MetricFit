@@ -290,7 +290,7 @@ function caloriesBurnt (workoutInputs, weight, height, age, sex, workoutCategory
         BMR=10*weight+6.25*height-5*age-161;
     }
     const MET = workoutMETValues[workoutCategory][workoutIntensity];
-    return MET * (BMR/24) * (duration/60);
+    return (MET * (BMR/24) * (duration/60)).toFixed(2);
     
 
 }

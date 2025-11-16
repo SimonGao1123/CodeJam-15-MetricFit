@@ -1,164 +1,37 @@
 [
   {
-    "username": "simon",
-    "id": "simon-1",
-    "streak": 0,
-    "weight": 100,
-    "sex": "male",
-    "age": 20,
-    "height": 100,
-    "weeklyCalendar": [
-      [],
-      [],
-      [],
-      [],
-      [],
-      [],
-      []
-    ],
-    "weeklyCaloriesBurnt": 0,
-    "totalCaloriesBurnt": 0
-  },
-  {
     "username": "can",
     "id": "can-1",
-    "streak": 5,
+    "streak": 6,
     "weight": 0,
     "sex": null,
     "age": 0,
-    "height": 67,
+    "height": 0,
     "weeklyCalendar": [
-      [],
       [
-        3
+        {
+          "workout_title": "busted squats",
+          "workoutCategory": "weightAndBodyweight",
+          "sets": 5,
+          "reps": 12,
+          "weights": 50
+        },
+        {
+          "workout_title": "busted squats",
+          "workoutCategory": "weightAndBodyweight",
+          "sets": 5,
+          "reps": 12,
+          "weights": 50
+        }
       ],
       [],
       [],
       [],
       [],
-      []
-    ],
-    "weeklyCaloriesBurnt": 0,
-    "totalCaloriesBurnt": 0
-  },
-  {
-    "username": "ryan",
-    "id": "ryan-2",
-    "streak": 0,
-    "weight": 0,
-    "sex": null,
-    "age": 0,
-    "height": 0,
-    "weeklyCalendar": [
-      [],
-      [],
-      [],
-      [],
-      [],
       [],
       []
     ],
-    "weeklyCaloriesBurnt": 0,
-    "totalCaloriesBurnt": 0
-  },
-  {
-    "username": "3",
-    "id": "3-3",
-    "streak": 0,
-    "weight": 0,
-    "sex": null,
-    "age": 0,
-    "height": 0,
-    "weeklyCalendar": [
-      [],
-      [],
-      [],
-      [],
-      [],
-      [],
-      []
-    ],
-    "weeklyCaloriesBurnt": 0,
-    "totalCaloriesBurnt": 0
-  },
-  {
-    "username": "chin",
-    "id": "chin-1",
-    "streak": 0,
-    "weight": 0,
-    "sex": null,
-    "age": 0,
-    "height": 0,
-    "weeklyCalendar": [
-      [],
-      [],
-      [],
-      [],
-      [],
-      [],
-      []
-    ],
-    "weeklyCaloriesBurnt": 0,
-    "totalCaloriesBurnt": 0
-  },
-  {
-    "username": "1234567890",
-    "id": "1234567890-2",
-    "streak": 0,
-    "weight": 0,
-    "sex": null,
-    "age": 0,
-    "height": 0,
-    "weeklyCalendar": [
-      [],
-      [],
-      [],
-      [],
-      [],
-      [],
-      []
-    ],
-    "weeklyCaloriesBurnt": 0,
-    "totalCaloriesBurnt": 0
-  },
-  {
-    "username": "0",
-    "id": "0-1",
-    "streak": 0,
-    "weight": 0,
-    "sex": null,
-    "age": 0,
-    "height": 0,
-    "weeklyCalendar": [
-      [],
-      [],
-      [],
-      [],
-      [],
-      [],
-      []
-    ],
-    "weeklyCaloriesBurnt": 0,
-    "totalCaloriesBurnt": 0
-  },
-  {
-    "username": "simon223",
-    "id": "simon223-1",
-    "streak": 0,
-    "weight": 0,
-    "sex": null,
-    "age": 0,
-    "height": 0,
-    "weeklyCalendar": [
-      [],
-      [],
-      [],
-      [],
-      [],
-      [],
-      []
-    ],
-    "weeklyCaloriesBurnt": 10.625,
-    "totalCaloriesBurnt": 10.625
+    "weeklyCaloriesBurnt": 1.3541666666666667,
+    "totalCaloriesBurnt": 1.3541666666666667
   }
 ]
