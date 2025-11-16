@@ -1,0 +1,29 @@
+[
+  {
+    "username": "s",
+    "id": "s-3",
+    "streak": 0,
+    "weight": 123,
+    "sex": "male",
+    "age": 12,
+    "height": 12,
+    "weeklyCalendar": [
+      [],
+      [
+        {
+          "workout_title": "12",
+          "workoutCategory": "cardio",
+          "calories": 100,
+          "duration": 12
+        }
+      ],
+      [],
+      [],
+      [],
+      [],
+      []
+    ],
+    "monthlyCaloriesBurnt": 100,
+    "totalCaloriesBurnt": 100
+  }
+]

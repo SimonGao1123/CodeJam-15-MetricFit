@@ -11,7 +11,7 @@ router.post("/addUser", (req, res) => {
         const {username, id} = req.body;
 
         const data = readUserInfo();
-        const newData = {username, id, streak: 0, weight: 0, sex: null, age: 0, height: 0, weeklyCalendar: Array.from({ length: 7 }, () => []), weeklyCaloriesBurnt: 0, totalCaloriesBurnt: 0};
+        const newData = {username, id, streak: 0, weight: 0, sex: null, age: 0, height: 0, weeklyCalendar: Array.from({ length: 7 }, () => []), monthlyCaloriesBurnt: 0, totalCaloriesBurnt: 0};
         data.push(newData);
         writeUserInfo(data);
     } catch (error) {
@@ -19,6 +19,48 @@ router.post("/addUser", (req, res) => {
     }
     
 
+});
+router.get("/leaderboard/:id", (req, res) => {
+  try {
+    const id = req.params.id;
+    const data = readUserInfo() || [];
+
+    // sort users by monthlyCaloriesBurnt in descending order
+    const sorted = [...data].sort((a, b) => {
+      const aCals = Number(a.monthlyCaloriesBurnt) || 0;
+      const bCals = Number(b.monthlyCaloriesBurnt) || 0;
+      return bCals - aCals;
+    });
+
+    // top five full user objects
+    const topFiveUsers = sorted.slice(0, 5);
+
+    // convert to public data (username + monthly cals)
+    const leaderboard = topFiveUsers.map(user => ({
+      id: user.id,  // optional – remove if you don't want to expose id
+      username: user.username,
+      monthlyCaloriesBurnt: Number(user.monthlyCaloriesBurnt) || 0
+    }));
+
+    // find the requested user
+    const requestedUser = sorted.find(user => user.id === id);
+
+    // if they exist and are NOT already in the top 5, append them
+    const isInTopFive = topFiveUsers.some(user => user.id === id);
+
+    if (requestedUser && !isInTopFive) {
+      leaderboard.push({
+        id: requestedUser.id,  // optional
+        username: requestedUser.username,
+        monthlyCaloriesBurnt: Number(requestedUser.monthlyCaloriesBurnt) || 0
+      });
+    }
+
+    res.send(leaderboard);
+  } catch (error) {
+    console.error("Error while building leaderboard: ", error);
+    res.status(500).send({ message: "Server error building leaderboard" });
+  }
 });
 
 // for logging in focus on a user (get a specific id)
@@ -54,7 +96,7 @@ router.patch("/updateUserCalendar", (req, res) => {
     const newUser = {
       ...pastUser,
       weeklyCalendar: newCalendar,
-      weeklyCaloriesBurnt: (pastUser.weeklyCaloriesBurnt || 0) + calories,
+      monthlyCaloriesBurnt: (pastUser.monthlyCaloriesBurnt || 0) + calories,
       totalCaloriesBurnt: (pastUser.totalCaloriesBurnt || 0) + calories
     };
 
@@ -74,7 +116,7 @@ router.delete("/resetWeeklyCalendar/:id", (req, res) => {
     const pastUser = data.find(user => user.id === id);
     const indexUser = data.findIndex(user => user.id === id);
 
-    const newUser = {...pastUser, weeklyCalendar: Array.from({ length: 7 }, () => []), weeklyCaloriesBurnt: 0}
+    const newUser = {...pastUser, weeklyCalendar: Array.from({ length: 7 }, () => []), monthlyCaloriesBurnt: 0}
     data[indexUser] = newUser;
     writeUserInfo(data);
     } catch (error) {
