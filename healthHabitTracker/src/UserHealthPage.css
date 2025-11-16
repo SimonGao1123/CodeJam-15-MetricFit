@@ -15,8 +15,25 @@
     border-radius: 50px;
     font-size: 1.7vw;
 
-    font-family: 'Momo Trust Display', serif;    
+    font-family: 'Momo Trust Display', serif;   
+    
+    opacity: 0;
+    transform: scale(0.95);
+    animation: overlayFadeIn 0.35s ease forwards;
+    z-index:10;
 }
+
+@keyframes overlayFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
 .overlay-box label{
     display: flex;
     flex-direction: column;
@@ -47,7 +64,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    height: 100vh;
+    
 }
 
 .box1{
@@ -55,17 +72,18 @@
     flex-direction: row;
     justify-content: center;
     flex: 0.2;
-    background-color: rgba(255, 255, 255,0.9);
+    background-color: rgba(195, 238, 251);
     font-family: 'Momo Trust Display', serif;
     border-radius: 30px;
     margin: 10px 6.7px;
     border-style: solid;
     border-width: 5px;
-    border-color: #c0c0c0;
+    border-color: #ffffff;
     transition: border-color 0.2s ease;
+    box-shadow: 0 0 12px rgba(132, 226, 229, 0.4);
 }
 .box1:hover {
-    border-color: #84e2e5;    
+    border-color: rgba(195, 238, 251, 0.9);    
 }
 
 .head{
@@ -105,24 +123,25 @@
     flex-direction: row;
     justify-content: center;
     flex: 1;
-    background-color: rgb(210, 242, 250,0.9);
+    background-color: rgb(244, 250, 251);
     font-family: 'Momo Trust Display', serif;
     border-radius: 30px;
     margin: 10px 6.7px;
     border-style: solid;
     border-width: 5px;
-    border-color: #c0c0c0;
+    border-color: rgb(244, 250, 251);
     transition: border-color 0.2s ease;
+    box-shadow: 0 0 12px rgba(132, 226, 229, 0.4);
 }
 .box2:hover {
-    border-color: #232323;    
+    border-color:  rgba(195, 238, 251, 0.9);    
 }
-
 .box2-attributes{
     display: flex;
     align-items: center;
     flex-direction: column;
 }
+
 
 .box3{
     display:flex;
@@ -163,22 +182,4 @@ button {
 
 button:hover{
     transform: scale(1.08);
-}
-
-.exercise-select { /*PLACEHOLDER*/
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  background-color: white;
-  font-size: 1.15vw;
-  color: #333;
-  outline: none;
-  font-family: 'Momo Trust Display', serif;
-}
-
-.weekly-table input{ /*PLACEHOLDER*/
-    font-family: 'Momo Trust Display', serif;
-    margin-top: 15px;
-    font-size: 1.0vw;
-    width: 5vw;
 }

@@ -8,5 +8,20 @@
     "username": "s",
     "password": "060a1a32f24001e31a751e77490f92ea:6ba45c0144600fc41dd5da22e5b9285926f626f03f803c759b4c046c55febf8e0b320fa7d26879f3673311bc5c655583ebca3742aca68e0b6b9f3cc46ee17ddf",
     "id": "s-1"
+  },
+  {
+    "username": "simon",
+    "password": "e9be16630bb9bc8ab78c1d1bf3586846:579a7916d17a5201db2dea840a222202760f0e2d4a066592f500f36a92fe95d32fe8ec2bd155ab38922837d72b23a5f2788629c505d8b59be56706d095eab9cb",
+    "id": "simon-5"
+  },
+  {
+    "username": "daniel",
+    "password": "5acab1a50f4a91bf9a3c72545ac00215:7398aabd3b139b0463dee7b6aba57587ccbc989a464175bc375434d9aecefecc03069db540a94272f3e4b806f7e2e16b8c745f9a73b8febec3faf85dcb5208e9",
+    "id": "daniel-6"
+  },
+  {
+    "username": "alex",
+    "password": "b032d8744bd1ed014976642c827b7351:04dbdd47105c5b1c500a6659c0d85c800b39ccff04715a133934ea309c6be69c066ff3d0b62fce25112df10b58b501379e44850475315baa0b52ba7f8fc0971b",
+    "id": "alex-7"
   }
 ]

@@ -1,0 +1,276 @@
+[
+  {
+    "username": "simon",
+    "id": "simon-5",
+    "streak": 0,
+    "weight": 67,
+    "sex": "male",
+    "age": 67,
+    "height": 67,
+    "weeklyCalendar": [
+      [
+        {
+          "workout_title": "run",
+          "workoutCategory": "cardio",
+          "calories": 168.61,
+          "duration": 32
+        },
+        {
+          "workout_title": "run",
+          "workoutCategory": "cardio",
+          "calories": 168.61,
+          "duration": 32
+        },
+        {
+          "workout_title": "run",
+          "workoutCategory": "cardio",
+          "calories": 168.61,
+          "duration": 32
+        }
+      ],
+      [],
+      [],
+      [],
+      [],
+      [],
+      []
+    ],
+    "weeklyCaloriesBurnt": 505.83000000000004,
+    "totalCaloriesBurnt": 505.83000000000004
+  },
+  {
+    "username": "daniel",
+    "id": "daniel-6",
+    "streak": 0,
+    "weight": 0,
+    "sex": null,
+    "age": 0,
+    "height": 0,
+    "weeklyCalendar": [
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      []
+    ],
+    "weeklyCaloriesBurnt": 0,
+    "totalCaloriesBurnt": 0
+  },
+  {
+    "username": "alex",
+    "id": "alex-7",
+    "streak": 0,
+    "weight": 100,
+    "sex": "male",
+    "age": 90,
+    "height": 180,
+    "weeklyCalendar": [
+      [
+        {
+          "workout_title": "1",
+          "workoutCategory": "cardio",
+          "calories": 11.67,
+          "duration": 1
+        }
+      ],
+      [
+        {
+          "workout_title": "1",
+          "workoutCategory": "cardio",
+          "calories": 11.67,
+          "duration": 1
+        },
+        {
+          "workout_title": "1",
+          "workoutCategory": "cardio",
+          "calories": 11.67,
+          "duration": 1
+        }
+      ],
+      [
+        {
+          "workout_title": "1",
+          "workoutCategory": "cardio",
+          "calories": 11.67,
+          "duration": 1
+        },
+        {
+          "workout_title": "1",
+          "workoutCategory": "cardio",
+          "calories": 11.67,
+          "duration": 1
+        },
+        {
+          "workout_title": "41241",
+          "workoutCategory": "weightAndBodyweight",
+          "calories": 574,
+          "sets": 0,
+          "reps": 0,
+          "weights": 0
+        },
+        {
+          "workout_title": "41241",
+          "workoutCategory": "weightAndBodyweight",
+          "calories": 574,
+          "sets": 0,
+          "reps": 0,
+          "weights": 0
+        },
+        {
+          "workout_title": "41241",
+          "workoutCategory": "weightAndBodyweight",
+          "calories": 574,
+          "sets": 23,
+          "reps": 4,
+          "weights": 123
+        }
+      ],
+      [
+        {
+          "workout_title": "Run",
+          "workoutCategory": "cardio",
+          "calories": 116.67,
+          "duration": 10
+        },
+        {
+          "workout_title": "Run",
+          "workoutCategory": "cardio",
+          "calories": 116.67,
+          "duration": 10
+        },
+        {
+          "workout_title": "Run",
+          "workoutCategory": "cardio",
+          "calories": 116.67,
+          "duration": 10
+        },
+        {
+          "workout_title": "Run",
+          "workoutCategory": "cardio",
+          "calories": 116.67,
+          "duration": 10
+        },
+        {
+          "workout_title": "Run",
+          "workoutCategory": "cardio",
+          "calories": 116.67,
+          "duration": 10
+        },
+        {
+          "workout_title": "Run",
+          "workoutCategory": "cardio",
+          "calories": 116.67,
+          "duration": 10
+        },
+        {
+          "workout_title": "Run",
+          "workoutCategory": "cardio",
+          "calories": 116.67,
+          "duration": 10
+        },
+        {
+          "workout_title": "Run",
+          "workoutCategory": "cardio",
+          "calories": 116.67,
+          "duration": 10
+        },
+        {
+          "workout_title": "Run",
+          "workoutCategory": "cardio",
+          "calories": 116.67,
+          "duration": 10
+        },
+        {
+          "workout_title": "Run",
+          "workoutCategory": "cardio",
+          "calories": 116.67,
+          "duration": 10
+        },
+        {
+          "workout_title": "Run",
+          "workoutCategory": "cardio",
+          "calories": 116.67,
+          "duration": 10
+        },
+        {
+          "workout_title": "Run",
+          "workoutCategory": "cardio",
+          "calories": 116.67,
+          "duration": 10
+        },
+        {
+          "workout_title": "Run",
+          "workoutCategory": "cardio",
+          "calories": 116.67,
+          "duration": 10
+        },
+        {
+          "workout_title": "Run",
+          "workoutCategory": "cardio",
+          "calories": 116.67,
+          "duration": 10
+        },
+        {
+          "workout_title": "Run",
+          "workoutCategory": "cardio",
+          "calories": 116.67,
+          "duration": 10
+        },
+        {
+          "workout_title": "Wievghts",
+          "workoutCategory": "weightAndBodyweight",
+          "calories": 227.5,
+          "sets": 10,
+          "reps": 2,
+          "weights": 2
+        }
+      ],
+      [
+        {
+          "workout_title": "Run",
+          "workoutCategory": "cardio",
+          "calories": 116.67,
+          "duration": 10
+        },
+        {
+          "workout_title": "1",
+          "workoutCategory": "cardio",
+          "calories": 11.67,
+          "duration": 1
+        }
+      ],
+      [
+        {
+          "workout_title": "Run",
+          "workoutCategory": "cardio",
+          "calories": 233.33,
+          "duration": 20
+        },
+        {
+          "workout_title": "1",
+          "workoutCategory": "cardio",
+          "calories": 11.67,
+          "duration": 1
+        }
+      ],
+      [
+        {
+          "workout_title": "1",
+          "workoutCategory": "cardio",
+          "calories": 11.67,
+          "duration": 1
+        },
+        {
+          "workout_title": "1",
+          "workoutCategory": "cardio",
+          "calories": 11.67,
+          "duration": 1
+        }
+      ]
+    ],
+    "weeklyCaloriesBurnt": 4154.580000000002,
+    "totalCaloriesBurnt": 4154.580000000002
+  }
+]
