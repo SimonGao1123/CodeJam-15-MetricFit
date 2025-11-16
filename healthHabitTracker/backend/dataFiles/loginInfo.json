@@ -1,47 +1,7 @@
 [
   {
-    "username": "1",
-    "password": "b6bb31583cd616056e2d39fbed93474d:240edf48f1ff306784f0ff27a9c211d9d22785b534f82038d14e3d90a91d2e14b760c2d44756e57dbfca3dc3b5f19b4d853b839e8d6b9243d3d6df5101975256",
-    "id": "1-3"
-  },
-  {
-    "username": "2",
-    "password": "d53769f218bc59d86f10330f491b37c5:90daf296c2d95e4acb2dc07f007b54314dc069882c32bc02e5b9c4050c484e92ac788ac8a8f7b1cbff66e916ac75b077e8adf9e6ff7e2b78c89358ca08593b92",
-    "id": "2-1"
-  },
-  {
-    "username": "can",
-    "password": "5ee7f336b52910b8cd3d1c9ec7751868:674a8c7a7983d7ae3ddc9c7f02ac2e82b60e26c2195efea0a4e650d07aed6ffd8226380342d3fcc9210734eed3a6eb1b6e865808b301906e8de72274e7e7778d",
-    "id": "can-1"
-  },
-  {
-    "username": "ryan",
-    "password": "e0d0d31bd96b198d87b6bc6abdfbde0d:db73e2e93f1e0ba31e19dd973486630a99fc1486aec3ba66ca0db3fbf65159dc07df045b235029b89952a798fd6f55ca9a0ac22f1d35737d7160338a160ead01",
-    "id": "ryan-2"
-  },
-  {
-    "username": "3",
-    "password": "0070929aaaae28dbecdde8f607509399:cc68bd3dc1285bf11f16e9fc2a7729bc3d54d0fcd73a8731e8c3f49896fd9426d9d14c1527c01c4406d0ee25183ff5b0835cf2304fb9e352f2554115c77a9038",
-    "id": "3-3"
-  },
-  {
-    "username": "chin",
-    "password": "774a8b7f39587d7e889147ff0fbac020:67a38af2f2eb98c5898fa98f72d0def8252e3be156b71918aaeeaab8e9c40c0ba45e1ef26024190fa3169b48c577ccc1f835ee5293d834fa705928aaaf4a27ef",
-    "id": "chin-1"
-  },
-  {
-    "username": "1234567890",
-    "password": "3100db129a87586a6984af4e828ef6c8:06c4d7a217fdab6734f5ae8f1f604e7be3aee420aa52463a71ea785f5fdd6fd36769374838dca8ae929deaa448379e951ae248e8bdbc9943d0dfe60668b66d41",
-    "id": "1234567890-2"
-  },
-  {
-    "username": "0",
-    "password": "5a95f9f42c3d674901317f13b7bc0c0b:a08d3227065946e946521d6674d0a4a3a0dcb36b2c6a6179a8a0e1a441f0df9ed99fa90c35c62b5909d0f7745bc7b3d4f54d5b002618e979da05dbc9d88433b2",
-    "id": "0-1"
-  },
-  {
-    "username": "simon223",
-    "password": "cbe30d3ae84d36e6b4e8520fb71a915c:63070a6644caec94904ddb67f304100d307e9fb91de2cc7eb332331a1366aa76dad0c7769936b94a527fc01fdc2041d3c6af9f471d74843551d73423c8b812d9",
-    "id": "simon223-1"
+    "username": "simon",
+    "password": "973075499f534205369899bce4cad7dc:1740a60757d9de614e4e2ef09c6935f1bc996e9c0e8ae6ac9a742cb8cf5d8034cb9de1f8d252d532db4a7213f102998577cb2d53c548307c41ce7bb9d648a26e",
+    "id": "simon-1"
   }
 ]

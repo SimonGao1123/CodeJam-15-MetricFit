@@ -4,28 +4,6 @@ import {useEffect} from 'react'
 import workoutMETValues from './extraData/workoutMETValues.jsx' // data for wrkouts
 import WeeklyCalendar from './WeeklyCalendar.jsx';
 
-
-const defaultWeightTemplate = {
-        sets: "",
-        reps: "",
-        weights: "",
-        duration: "",
-        workout_title: ""
-    };
-    const defaultCardioTemplate = {
-        duration: "",
-        workout_title: ""
-    };
-// var currentDate = new Date();
-// var dayWeek = currentDate.getDay(); // Sunday - Saturday : 0 - 6
-// var dayMonth = currentDate.getDate(); // 1 - 31
-// // retrieve last logged date
-
-// console.log(currentDate)
-// var currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
-// console.log(currentDate)
-
-
 // function 
 function writeDateFile (newDate) {
     fetch("http://localhost:3000/writeDate", {
@@ -60,6 +38,8 @@ function UserHealthPage ({userLoggedIn, setUserLoggedIn, setDisplayLogin}) {
     console.log("weekly calendar: ", userLoggedIn.weeklyCalendar);
     const {streak, weight, sex, age, height, weeklyCalendar} = userLoggedIn;
     
+    
+
     const [calendar, setCalendar] = useState(weeklyCalendar); 
 
     // const [aiMessage, setAIMessage] = useState("");
@@ -70,6 +50,13 @@ function UserHealthPage ({userLoggedIn, setUserLoggedIn, setDisplayLogin}) {
     
     const [updateStreak, setUpdateStreak] = useState(streak);
 
+    useEffect(() => {
+    setUpdateHeight(height ?? 0);
+    setUpdateWeight(weight ?? 0);
+    setUpdateAge(age ?? 0);
+    setUpdateSex(sex ?? "");   // empty string instead of null
+    }, [height, weight, age, sex]);
+
     const [menuShown, setMenuShown] = useState(!sex);
 
     const [workoutCategory, setWorkoutCategory] = useState(null);
@@ -78,8 +65,6 @@ function UserHealthPage ({userLoggedIn, setUserLoggedIn, setDisplayLogin}) {
 
     const [displayMessage, setDisplayMessage] = useState(null);
 
-    console.log("Current date: " + currentDate);
-    console.log(workoutInputs)
 
     function updateClock(streak, weeklyCalendar, userLoggedIn) {
         if (!currentDate) {
@@ -156,123 +141,39 @@ function UserHealthPage ({userLoggedIn, setUserLoggedIn, setDisplayLogin}) {
             updateAge={updateAge}
             setUpdateAge={setUpdateAge}
             userLoggedIn={userLoggedIn}
+            displayMessage={displayMessage}
+            setDisplayMessage={setDisplayMessage}
             /> : <></>}
             
-            <GetWorkoutDetails 
-            workoutCategory={workoutCategory}
-            setWorkoutCategory={setWorkoutCategory}
-            workoutIntensity={workoutIntensity}
-            setWorkoutIntensity={setWorkoutIntensity}
-            workoutInputs={workoutInputs}
-            setWorkOutInputs={setWorkOutInputs}/>
+            
 
-            <WeeklyCalendar currentDay={currentDate} calendar={calendar} setCalendar={setCalendar}/>
+            <WeeklyCalendar
+                userLoggedIn={userLoggedIn}
+                currentDay={currentDate}
+                calendar={calendar}
+                setCalendar={setCalendar}
+                workoutCategory={workoutCategory}
+                setWorkoutCategory={setWorkoutCategory}
+                workoutIntensity={workoutIntensity}
+                setWorkoutIntensity={setWorkoutIntensity}
+                workoutInputs={workoutInputs}
+                setWorkOutInputs={setWorkOutInputs}
+                displayMessage={displayMessage}
+                setDisplayMessage={setDisplayMessage}
+                updateHeight={updateHeight}
+                updateAge={updateAge}
+                updateWeight={updateWeight}
+                updateSex={updateSex}
+                />
             
             <button onClick={() => signOutFunction(setUserLoggedIn, setDisplayLogin)}>Sign out</button>
 
-            <button onClick={() => console.log(caloriesBurnt(workoutInputs, updateWeight, updateHeight, updateAge, updateSex, workoutCategory, workoutIntensity))}>Get Calories Burnt</button>
+            
 
         </>
     );
     
 }
-
-function caloriesBurnt (workoutInputs, weight, height, age, sex, workoutCategory, workoutIntensity) {
-    if (!sex) {
-        console.log("No valid sex entered");
-        return;
-    }
-
-    let BMR;
-
-    const {duration} = workoutInputs;
-    if (!duration) {
-        console.log("No valid duration entered");
-        return;
-    }
-    if (sex === "male") {
-        BMR=10*weight+6.25*height-5*age+5;
-    } else {
-        BMR=10*weight+6.25*height-5*age-161;
-    }
-    const MET = workoutMETValues[workoutCategory][workoutIntensity];
-    return MET * (BMR/24) * (duration/60);
-    
-
-}
-function GetWorkoutDetails ({workoutCategory, setWorkoutCategory, workoutIntensity, setWorkoutIntensity, workoutInputs, setWorkOutInputs}) {
-    useEffect(() => {
-        if (!workoutCategory) {
-            setWorkOutInputs(null);
-            return;
-        }
-        setWorkOutInputs(
-            workoutCategory === "weightAndBodyweight"
-            ? defaultWeightTemplate
-            : defaultCardioTemplate
-        );
-    }, [workoutCategory, setWorkOutInputs]);
-    
-    return (
-        <div>
-            <label htmlFor='workout-cat-select'>Select Workout Category: </label>
-            <select value={workoutCategory} onChange={(e) => setWorkoutCategory(e.target.value)} id="workout-cat-select">
-                <option value="" selected disabled hidden>Select Option</option>
-                <option value="weightAndBodyweight">Weight/Bodyweight</option>
-                <option value="cardio">Cardio</option>
-            </select>
-
-            <label htmlFor='workout-intense-select'>Select Workout Intensity: </label>
-            <select value={workoutIntensity} onChange={(e) => setWorkoutIntensity(e.target.value)} id="workout-intense-select">
-                <option value="" selected disabled hidden>Select Option</option>
-                <option value="moderate">Moderate</option>
-                <option value="high">High</option>
-            </select>
-
-            <AdditionalWorkoutInputs workoutInputs={workoutInputs} setWorkOutInputs={setWorkOutInputs}/>
-        </div>
-    );
-}
-// includes set, duration, weights and reps for the exercise and workouttitle (depends on if choose cardio/weights)
-function AdditionalWorkoutInputs ({workoutInputs, setWorkOutInputs}) {
-    if (!workoutInputs) return null;
-
-  const inputs = [];
-
-  for (let key in workoutInputs) {
-    const isText = key === "workout_title";
-
-    inputs.push(
-      <div key={`input-${key}`}>
-        <label>{nameNormalizer(key)}</label>
-        <input
-          // we use text + inputMode so we fully control the string
-          type="text"
-          inputMode={isText ? "text" : "numeric"}
-          value={workoutInputs[key] ?? ""}
-          onChange={(e) => {
-            let value = e.target.value;
-            const newInputs = { ...workoutInputs };
-
-            if (!isText) {
-              // allow only digits
-              value = value.replace(/[^0-9]/g, "");
-
-              // remove leading zeros but keep a single 0 if all zeros
-              value = value.replace(/^0+(?=\d)/, "");
-            }
-
-            newInputs[key] = isText ? value : Number(value);
-            setWorkOutInputs(newInputs);
-          }}
-        />
-      </div>
-    );
-  }
-
-  return inputs;
-}
-
 
 function AttributeForm ({updateHeight, setUpdateHeight, updateWeight, setUpdateWeight, updateSex, setUpdateSex, updateAge, setUpdateAge,userLoggedIn}) {
     function handleUpdateAttributes (e) {
@@ -312,9 +213,5 @@ function signOutFunction (setUserLoggedIn, setDisplayLogin) {
     setUserLoggedIn({});
     setDisplayLogin(true); // go back to login page
 }
-const nameNormalizer = (name) => {
-    return name.split("_").map((word) => {
-        return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-    }).join(" ");
-}
+
 export default UserHealthPage;

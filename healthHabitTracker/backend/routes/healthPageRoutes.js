@@ -37,6 +37,36 @@ router.get("/getUser/:id", (req, res) => {
         console.error("error in obtaining user from userInfo.json " + error);
     }
 })
+router.patch("/updateUserCalendar", (req, res) => {
+  try {
+    const { id, newCalendar, caloriesBurnt } = req.body;
+    const data = readUserInfo();
+
+    const indexUser = data.findIndex(user => user.id === id);
+    if (indexUser === -1) {
+      return res.status(404).send({ message: "User not found" });
+    }
+
+    const pastUser = data[indexUser];
+
+    const calories = Number(caloriesBurnt) || 0;  // ensure number, default 0
+
+    const newUser = {
+      ...pastUser,
+      weeklyCalendar: newCalendar,
+      weeklyCaloriesBurnt: (pastUser.weeklyCaloriesBurnt || 0) + calories,
+      totalCaloriesBurnt: (pastUser.totalCaloriesBurnt || 0) + calories
+    };
+
+    data[indexUser] = newUser;
+    writeUserInfo(data);
+
+    res.send({ message: "successfully updated calendar" });
+  } catch (error) {
+    console.error("Error in updating the calendar data of user: ", error);
+    res.status(500).send({ message: "Server error updating calendar" });
+  }
+});
 
 // updates a user with id
 router.patch("/updateUser", (req, res) => {
