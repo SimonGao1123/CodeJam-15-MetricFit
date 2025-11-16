@@ -41,6 +41,7 @@ function UserHealthPage ({userLoggedIn, setUserLoggedIn, setDisplayLogin}) {
     
 
     const [calendar, setCalendar] = useState(weeklyCalendar); 
+    console.log("weekly calendar, ", weeklyCalendar);
 
     // const [aiMessage, setAIMessage] = useState("");
     const [updateHeight, setUpdateHeight] = useState(height);
@@ -64,8 +65,42 @@ function UserHealthPage ({userLoggedIn, setUserLoggedIn, setDisplayLogin}) {
     const [workoutInputs, setWorkOutInputs] = useState(null); // none chosen yet
 
     const [displayMessage, setDisplayMessage] = useState(null);
+    const [displayStreak, setDisplayStreak] = useState(0);
+    const [displayTotalBurnt, setDisplayTotalBurnt] = useState(0);
+    function getStreakAndTotalBurnt () {
+        fetch(`http://localhost:3000/getStreakTotalBurned/${userLoggedIn.id}`, {
+            method: "GET"
+        }).then(async response => {
+            const data = await response.json();
+            setDisplayStreak(data.streak);
+            setDisplayTotalBurnt(data.totalCaloriesBurnt);
+        }).catch(error => {
+            console.log("Error in getting streak/totalburned data: ", error);
+        })
+    }
+    useEffect(() => {
+        getStreakAndTotalBurnt();
+    }, [userLoggedIn.id]);
+    const [leaderBoardData, setLeaderBoardData] = useState(null);
+    
+    function getLeaderboard () {
+        fetch(`http://localhost:3000/leaderboard/${userLoggedIn.id}`, {
+            method: "GET"
+        }).then(async response => {
+            const data = await response.json();
+            //username: user.username,
+            //monthlyCaloriesBurnt: Number(user.monthlyCaloriesBurnt) || 0
+            setLeaderBoardData(data);
+        }).catch(error => {
+            console.log("Error in getting leaderboard data: ", error);
+        }) 
+    }
+    useEffect(() => {
+        getLeaderboard();
+    }, [userLoggedIn.id]);
+    console.log(leaderBoardData);
 
-
+    
     function updateClock(streak, weeklyCalendar, userLoggedIn) {
         if (!currentDate) {
             console.log("Current date not loaded yet");
@@ -98,7 +133,7 @@ function UserHealthPage ({userLoggedIn, setUserLoggedIn, setDisplayLogin}) {
         );
 
         if (startWeek1.getTime() !== startWeek2.getTime()) {
-            StreakUpdate(streak,weeklyCalendar,userLoggedIn)
+            StreakUpdate(streak,weeklyCalendar,userLoggedIn) // also calendar updater
         }
 
         setCurrentDate(tempDate);
@@ -109,7 +144,7 @@ function UserHealthPage ({userLoggedIn, setUserLoggedIn, setDisplayLogin}) {
     }
 
     function StreakUpdate(updateStreak,weeklyCalendar,userLoggedIn) {
-        // console.log(weeklyCalendar)
+        console.log(weeklyCalendar)
         if (weeklyCalendar.flat().length === 0){
             updateStreak = 0
         } else {
@@ -121,15 +156,18 @@ function UserHealthPage ({userLoggedIn, setUserLoggedIn, setDisplayLogin}) {
             body: JSON.stringify({id:userLoggedIn.id, streak:updateStreak})
         }).catch(error => {
             console.log("Error in adding user information: " + error);
-        })
+        });
+        
+        fetch(`http://localhost:3000/resetWeeklyCalendar/${userLoggedIn.id}`, {
+            method: "DELETE"
+        }).catch(error => {
+            console.log("Error in reseting weekly calendar, " + error);
+        });
     }
 
     return (
-        <>
-            <button onClick={() => updateClock()}>Update Day</button>
-            <h2>Hello {userLoggedIn.username}</h2>
+        <div className="user-health-page">
 
-            <button onClick={() => setMenuShown(!menuShown)}>☰</button>
             {menuShown ?
             <AttributeForm 
             updateHeight={updateHeight}
@@ -143,41 +181,94 @@ function UserHealthPage ({userLoggedIn, setUserLoggedIn, setDisplayLogin}) {
             userLoggedIn={userLoggedIn}
             displayMessage={displayMessage}
             setDisplayMessage={setDisplayMessage}
+            setMenuShown={setMenuShown}
             /> : <></>}
-            
-            
 
-            <WeeklyCalendar
-                userLoggedIn={userLoggedIn}
-                currentDay={currentDate}
-                calendar={calendar}
-                setCalendar={setCalendar}
-                workoutCategory={workoutCategory}
-                setWorkoutCategory={setWorkoutCategory}
-                workoutIntensity={workoutIntensity}
-                setWorkoutIntensity={setWorkoutIntensity}
-                workoutInputs={workoutInputs}
-                setWorkOutInputs={setWorkOutInputs}
-                displayMessage={displayMessage}
-                setDisplayMessage={setDisplayMessage}
-                updateHeight={updateHeight}
-                updateAge={updateAge}
-                updateWeight={updateWeight}
-                updateSex={updateSex}
-                />
-            
-            <button onClick={() => signOutFunction(setUserLoggedIn, setDisplayLogin)}>Sign out</button>
+            <div className='main-boxes'>
+                <div className='box1'>
+                    <div classsName ='box1-attributes'>
+                        
+                        <div className = 'head'>
+                        <h2>Hello {userLoggedIn.username}</h2>
+                        </div>
+                        
+                        <p>Current Streak: {displayStreak}</p>
+                        <p>Total Calories Burned: {displayTotalBurnt}</p>
+                        <div className = 'master-buttons'>
+                        <button onClick={() => setMenuShown(!menuShown)}>☰</button>
+                        {/*<button onClick={() => updateClock(streak, weeklyCalendar, userLoggedIn)}>Update Day</button>*/}
+                        <button onClick={() => signOutFunction(setUserLoggedIn, setDisplayLogin)}>Sign out</button>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div className='box2'>
+                    
+                    <div className='box2-attributes'>
+                    <WeeklyCalendar
+                        userLoggedIn={userLoggedIn}
+                        currentDay={currentDate}
+                        calendar={calendar}
+                        setCalendar={setCalendar}
+                        workoutCategory={workoutCategory}
+                        setWorkoutCategory={setWorkoutCategory}
+                        workoutIntensity={workoutIntensity}
+                        setWorkoutIntensity={setWorkoutIntensity}
+                        workoutInputs={workoutInputs}
+                        setWorkOutInputs={setWorkOutInputs}
+                        displayMessage={displayMessage}
+                        setDisplayMessage={setDisplayMessage}
+                        updateHeight={updateHeight}
+                        updateAge={updateAge}
+                        updateWeight={updateWeight}
+                        updateSex={updateSex}
+                        />
+                    </div>
+
+                    <div id="leaderboard-container">
+                        <h2>Leaderboard:</h2>
+                        <LeaderBoardDisplay leaderBoardData={leaderBoardData}/>
+                    </div>
+                </div>
+                    
+
+            </div>
+
 
             
-
-        </>
+        </div>
     );
     
 }
+function LeaderBoardDisplay({ leaderBoardData }) {
+  if (!leaderBoardData || leaderBoardData.length === 0) {
+    return <p>No leaderboard data yet.</p>;
+  }
 
-function AttributeForm ({updateHeight, setUpdateHeight, updateWeight, setUpdateWeight, updateSex, setUpdateSex, updateAge, setUpdateAge,userLoggedIn}) {
+  return (
+    <table>
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Monthly Calories Burned</th>
+        </tr>
+      </thead>
+      <tbody>
+        {leaderBoardData.map((user) => (
+          <tr key={user.username}>
+            <td>{user.username}</td>
+            <td>{user.monthlyCaloriesBurnt}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
+function AttributeForm ({updateHeight, setUpdateHeight, updateWeight, setUpdateWeight, updateSex, setUpdateSex, updateAge, setUpdateAge,userLoggedIn,setMenuShown}) {
     function handleUpdateAttributes (e) {
         e.preventDefault();
+
         fetch("http://localhost:3000/updateUser", {
             method: "PATCH",
             headers: {"Content-Type": "application/json"},
@@ -185,33 +276,37 @@ function AttributeForm ({updateHeight, setUpdateHeight, updateWeight, setUpdateW
         }).catch(error => {
             console.log("Error in adding user information: " + error);
         })
+        setMenuShown(false); 
     }
-    return (<form onSubmit={handleUpdateAttributes}>
-            <h3>Physical Attributes:</h3>
-            
-            <label htmlFor="updateheight">Height (cm): </label>
-            <input type="text" id="updateheight" value={updateHeight} onChange={(e) => {if(!isNaN(e.target.value))setUpdateHeight(Number(e.target.value))}}/>
-            
-            <label htmlFor="updateweight">Weight (kg): </label>
-            <input type="text" id="updateweight" value={updateWeight} onChange={(e) => {if(!isNaN(e.target.value))setUpdateWeight(Number(e.target.value))}}/>
-            
-            <label htmlFor="updatesex">Gender: </label>
-            <select id="updatesex" value={updateSex} onChange={(e)=>setUpdateSex(e.target.value)}>
-                <option selected disabled hidden value="">Select Option:</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-            </select>
-            
-            <label htmlFor="updateage">Age (years): </label>
-            <input type="number" id="updateage" value={updateAge} onChange={(e) => {if(!isNaN(e.target.value) || e.target.value < 0)setUpdateAge(Number(e.target.value))}}/>
-            
-            <button type="submit">Update</button>
-        </form>);
+    return (            
+    <div className='overlay-box'>
+            <form onSubmit={handleUpdateAttributes}>
+                <h3>Physical Attributes:</h3>
+                
+                <label for="updateheight">Height: </label>
+                <input type="text" id="updateheight" value={updateHeight} onChange={(e) => {if(!isNaN(e.target.value))setUpdateHeight(Number(e.target.value))}}/>
+                
+                <label for="updateweight">Weight: </label>
+                <input type="text" id="updateweight" value={updateWeight} onChange={(e) => {if(!isNaN(e.target.value))setUpdateWeight(Number(e.target.value))}}/>
+                
+                <label for="updatesex">Biological Sex: </label>
+                <select id="updatesex" value={updateSex} onChange={(e)=>setUpdateSex(e.target.value)}>
+                    <option selected disabled hidden value="">Select Option:</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+                
+                <label for="updateage">Age: </label>
+                <input type="number" id="updateage" value={updateAge} onChange={(e) => {if(!isNaN(e.target.value) || e.target.value < 0)setUpdateAge(Number(e.target.value))}}/>
+                
+                <button type="submit">Update</button>
+            </form>
+    </div>
+        );
 }
 
 function signOutFunction (setUserLoggedIn, setDisplayLogin) {
     setUserLoggedIn({});
     setDisplayLogin(true); // go back to login page
 }
-
 export default UserHealthPage;

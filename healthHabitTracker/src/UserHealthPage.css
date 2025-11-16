@@ -1,0 +1,184 @@
+@import url('https://fonts.googleapis.com/css2?family=Momo+Trust+Display&display=swap');
+
+
+.overlay-box {
+    position: fixed;
+    top: 10%;
+    left: 25%;
+    width: 50vw;
+    height: 80vh;
+
+    display: flex;
+    background:rgb(255, 255, 255);
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    font-size: 1.7vw;
+
+    font-family: 'Momo Trust Display', serif;    
+}
+.overlay-box label{
+    display: flex;
+    flex-direction: column;
+}
+.overlay-box button{
+    display: flex;
+    flex-direction: column;
+}
+.overlay-box select{
+    font-size: 1.1vw;
+    margin-top: 15px;
+    font-family: 'Momo Trust Display', serif;
+}   
+.overlay-box button{
+    font-size: 1.1vw;
+    margin-top: 15px;
+    font-family: 'Momo Trust Display', serif;
+}   
+.overlay-box input{
+    font-size: 1.1vw;
+    margin-top: 15px;
+    font-family: 'Momo Trust Display', serif;
+}   
+
+
+.main-boxes {
+    color:black;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 100vh;
+}
+
+.box1{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    flex: 0.2;
+    background-color: rgba(255, 255, 255,0.9);
+    font-family: 'Momo Trust Display', serif;
+    border-radius: 30px;
+    margin: 10px 6.7px;
+    border-style: solid;
+    border-width: 5px;
+    border-color: #c0c0c0;
+    transition: border-color 0.2s ease;
+}
+.box1:hover {
+    border-color: #84e2e5;    
+}
+
+.head{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.master-buttons{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.master-buttons button {
+    margin: 5px 0px;
+
+}
+
+.box1-attributes{
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+}
+.box1-attributes label{
+    display:flex;
+    flex-direction: column;
+}
+.box1-attributes button{
+    display:flex;
+    flex-direction: column;
+}
+
+
+
+.box2{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    flex: 1;
+    background-color: rgb(210, 242, 250,0.9);
+    font-family: 'Momo Trust Display', serif;
+    border-radius: 30px;
+    margin: 10px 6.7px;
+    border-style: solid;
+    border-width: 5px;
+    border-color: #c0c0c0;
+    transition: border-color 0.2s ease;
+}
+.box2:hover {
+    border-color: #232323;    
+}
+
+.box2-attributes{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.box3{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    flex: 1;
+    background-color: rgb(255, 255, 255);
+    background-color: rgba(255, 255, 255,0.3);
+    font-family: 'Momo Trust Display', serif;
+    border-radius: 30px;
+    margin: 10px 6.7px;
+    border-style: solid;
+    border-width: 5px;
+    border-color: #c0c0c0;
+    transition: border-color 0.2s ease;
+}
+.box3:hover {
+    border-color: #84e2e5;    
+}
+
+
+
+button {
+    font-family: 'Momo Trust Display', serif;
+    padding: 8px;
+    appearance: none;
+    border: none;
+    border-radius: 10px;
+    background-color: rgb(240, 240, 240);
+    font-size: 1.3vw;
+
+    transition: 
+        background-color 0.2s ease,
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+button:hover{
+    transform: scale(1.08);
+}
+
+.exercise-select { /*PLACEHOLDER*/
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: white;
+  font-size: 1.15vw;
+  color: #333;
+  outline: none;
+  font-family: 'Momo Trust Display', serif;
+}
+
+.weekly-table input{ /*PLACEHOLDER*/
+    font-family: 'Momo Trust Display', serif;
+    margin-top: 15px;
+    font-size: 1.0vw;
+    width: 5vw;
+}
