@@ -118,10 +118,19 @@ function WeeklyCalendar ({userLoggedIn,
     setDisplayMessage(`Added "${workoutInputs.workout_title}" to ${dayRefs[selectedDay]}.`);
 }
 
-    return (
-        <div className="weekly-calendar">
-            <p>{selectedDay !== null ? `Selected ${dayRefs[selectedDay]}` : "No day selected"}</p>
-            <GetWorkoutDetails 
+return (
+  <div className="weekly-calendar">
+    <div className="weekly-layout">
+      {/* LEFT SIDE: text and controls */}
+      <div className="week-left">
+        <p>
+          {selectedDay !== null
+            ? `Selected ${dayRefs[selectedDay]}`
+            : "No day selected"}
+        </p>
+
+        <div className="box2-text">
+          <GetWorkoutDetails
             workoutCategory={workoutCategory}
             setWorkoutCategory={setWorkoutCategory}
             workoutIntensity={workoutIntensity}
@@ -129,28 +138,47 @@ function WeeklyCalendar ({userLoggedIn,
             workoutInputs={workoutInputs}
             setWorkOutInputs={setWorkOutInputs}/>
 
-            <p>{displayMessage}</p>
-            <button onClick={() => addWorkoutToCalendar()}>Add workout</button>
-            {wholeCalendarDisplay}
-            <button
-            onClick={() =>
-                console.log(
-                caloriesBurnt(
-                    workoutInputs,
-                    updateWeight,
-                    updateHeight,
-                    updateAge,
-                    updateSex || userLoggedIn.sex,
-                    workoutCategory,
-                    workoutIntensity
-                )
-                )
-            }
-            >
-            Get Calories Burnt
-            </button>
+            {/* <p>{displayMessage}</p> */}
+            {/* <button onClick={() => addWorkoutToCalendar()}>Add workout</button>
+            {wholeCalendarDisplay} */}
+            
         </div>
-    );
+
+        <p>{displayMessage}</p>
+
+        <button onClick={addWorkoutToCalendar}>
+          Add workout
+        </button>
+
+        <button
+          onClick={() =>
+            console.log(
+              caloriesBurnt(
+                workoutInputs,
+                updateWeight,
+                updateHeight,
+                updateAge,
+                updateSex || userLoggedIn.sex,
+                workoutCategory,
+                workoutIntensity
+              )
+            )
+          }
+        >
+          Get Calories Burnt
+        </button>
+      </div>
+
+      {/* RIGHT SIDE: NEW BOX JUST FOR THE WEEK */}
+      <div className="box-week">
+        {wholeCalendarDisplay}
+      </div>
+    </div>
+  </div>
+);
+
+
+
 }
 function updateCalendarUser (userLoggedIn, newCalendar, caloriesBurnt) {
     fetch("http://localhost:3000/updateUserCalendar", {
@@ -180,34 +208,44 @@ function DisplayCalendarSquare({
 
   const workoutsDisplay = workouts.map((workout, idx) => (
     <div key={`${dayIndex}-${idx}`} className="workout">
-      <p>{nameNormalizer(workout.workout_title)}</p>
-    
-    <p style={{color: 'green', fontWeight: 'bold'}}>
-        🔥 {workout.calories || 0} calories
-      </p>
+
+        <div className="workout-title-calories">
+            <p>{nameNormalizer(workout.workout_title)} 🔥 {workout.calories || 0} calories</p>
+        </div>
+
       {}
       {workout.workoutCategory === "weightAndBodyweight" && (
         <>
           <p>Sets: {workout.sets}</p>
           <p>Reps: {workout.reps}</p>
-          <p>Weights {workout.weights}</p>
+          <p>Weights: {workout.weights}</p>
         </>
       )}
     </div>
   ));
 
   return (
-    <div className='days'>
-        <div
-        onClick={() => setSelectedDay(dayIndex)}
-        style={{ backgroundColor: dayIndex===selectedDay ? "green" : ifCurrDay ? "yellow" : "white" }}
-        className="calendar-square"
-        >
-        <p>{dayName}</p>
-        {workoutsDisplay}
+  <div className="days">
+    <div
+      onClick={() => setSelectedDay(dayIndex)}
+      className="calendar-square"
+      style={{
+        backgroundColor: dayIndex === selectedDay ? "#a6f6afff" :
+                         ifCurrDay ? "#f6ffaaff" : "white"
+      }}
+    >
+      <p className="day-label"> {dayName} </p>
+
+      {workouts.length > 0 ? (
+        <div className="added-workout-display">
+          {workoutsDisplay}
         </div>
+      ) : (
+        <p style={{ opacity: 0.6, margin: "6px 0" }}>No workouts</p>
+      )}
     </div>
-  );
+  </div>
+);
 }
 
 
@@ -251,12 +289,12 @@ function AdditionalWorkoutInputs ({workoutInputs, setWorkOutInputs}) {
   const inputs = [];
 
   for (let key in workoutInputs) {
-    let addon = "";
+    let addon = ": ";
     if (key === "weights") {
-        addon = "(kg)"
+        addon = "(kg): "
     }
     if (key === "duration") {
-        addon = "{mins}"
+        addon = "{mins}: "
     }
     const isText = key === "workout_title";
 
@@ -310,10 +348,12 @@ function caloriesBurnt (workoutInputs, weight, height, age, sex, workoutCategory
         BMR=10*weight+6.25*height-5*age-161;
     }
     const MET = workoutMETValues[workoutCategory][workoutIntensity];
-    return (MET * (BMR/24) * (duration/60)).toFixed(2);
+    return Math.round((MET * (BMR/24) * (duration/60)) / 10) * 10;
     
 
 }
+
+
 const nameNormalizer = (name) => {
     return name.split("_").map((word) => {
         return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
