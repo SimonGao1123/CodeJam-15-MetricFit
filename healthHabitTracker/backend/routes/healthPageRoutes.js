@@ -56,6 +56,22 @@ router.patch("/updateUser", (req, res) => {
     }
 });
 
+// updates a user's streak with id
+router.patch("/updateStreak", (req, res) => {
+    try{
+        const {id, streak} = req.body;
+        const data = readUserInfo();
+        
+        const pastUser = data.find(user => user.id === id);
+        const indexUser = data.findIndex(user => user.id === id);
+
+        const newUserStreak = {...pastUser, streak:streak};
+        data[indexUser] = newUserStreak;
+        writeUserInfo(data);
+    } catch(error) {
+        console.error("Error in updating user streak: " + error);
+    }
+});
 
 function readUserInfo () {
     try {
