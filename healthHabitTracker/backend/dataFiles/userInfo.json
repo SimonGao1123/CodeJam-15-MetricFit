@@ -13,15 +13,63 @@
         {
           "workout_title": "32",
           "workoutCategory": "cardio"
+        },
+        {
+          "workout_title": "12",
+          "workoutCategory": "weightAndBodyweight",
+          "sets": 1,
+          "reps": 1,
+          "weights": 1
+        }
+      ],
+      [
+        {
+          "workout_title": "32",
+          "workoutCategory": "cardio"
         }
       ],
       [],
       [],
       [],
+      []
+    ],
+    "weeklyCaloriesBurnt": -1633.94,
+    "totalCaloriesBurnt": -1633.94
+  },
+  {
+    "username": "s",
+    "id": "s-1",
+    "streak": 0,
+    "weight": 100,
+    "sex": "female",
+    "age": 7,
+    "height": 100,
+    "weeklyCalendar": [
+      [],
+      [
+        {
+          "workout_title": "12",
+          "workoutCategory": "cardio",
+          "calories": 119.08,
+          "duration": 12
+        }
+      ],
+      [
+        {
+          "workout_title": "1231",
+          "workoutCategory": "weightAndBodyweight",
+          "calories": 7940.38,
+          "sets": 1231,
+          "reps": 1231,
+          "weights": 1231
+        }
+      ],
+      [],
+      [],
       [],
       []
     ],
-    "weeklyCaloriesBurnt": -816.47,
-    "totalCaloriesBurnt": -816.47
+    "weeklyCaloriesBurnt": 8059.46,
+    "totalCaloriesBurnt": 8059.46
   }
 ]

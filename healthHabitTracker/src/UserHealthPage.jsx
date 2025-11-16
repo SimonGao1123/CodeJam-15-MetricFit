@@ -41,6 +41,7 @@ function UserHealthPage ({userLoggedIn, setUserLoggedIn, setDisplayLogin}) {
     
 
     const [calendar, setCalendar] = useState(weeklyCalendar); 
+    console.log("weekly calendar, ", weeklyCalendar);
 
     // const [aiMessage, setAIMessage] = useState("");
     const [updateHeight, setUpdateHeight] = useState(height);

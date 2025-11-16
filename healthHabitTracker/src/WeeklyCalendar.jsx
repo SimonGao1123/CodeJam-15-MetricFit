@@ -43,73 +43,79 @@ function WeeklyCalendar ({userLoggedIn,
         updateCalendarUser(userLoggedIn, calendar, burntCalories);
     }, [calendar, burntCalories]); // will update backend
 
-    function addWorkoutToCalendar () {
-        // 1. need a selected day
-        if (selectedDay === null) {
-            setDisplayMessage("Please select a day in the calendar first.");
-            return;
-        }
+    function addWorkoutToCalendar() {
+    // 1. need a selected day
+    if (selectedDay === null) {
+        setDisplayMessage("Please select a day in the calendar first.");
+        return;
+    }
 
-        // 2. need workout inputs
-        if (!workoutInputs) {
-            setDisplayMessage("Please choose workout category and fill in workout details.");
-            return;
-        }
+    // 2. need workout inputs
+    if (!workoutInputs) {
+        setDisplayMessage("Please choose workout category and fill in workout details.");
+        return;
+    }
 
-        if (!workoutInputs.workout_title) {
-            setDisplayMessage("Please enter a workout title.");
-            return;
-        }
+    if (!workoutInputs.workout_title) {
+        setDisplayMessage("Please enter a workout title.");
+        return;
+    }
 
-        // 3. create the workout object we will store
-        const baseWorkout = {
-            workout_title: workoutInputs.workout_title,
-            workoutCategory: workoutCategory
-        };
+    // 3. compute calories FIRST
+    const calories = caloriesBurnt(
+        workoutInputs,
+        updateWeight,
+        updateHeight,
+        updateAge,
+        updateSex || userLoggedIn.sex,
+        workoutCategory,
+        workoutIntensity
+    );
+    console.log("calories burnt ", calories);
+    if (calories == null || Number.isNaN(calories)) {
+        console.log("caloriesBurnt returned invalid:", calories);
+        setDisplayMessage("Could not calculate calories. Check your inputs (duration, sex, etc).");
+        return;
+    }
 
-        if (workoutCategory === "weightAndBodyweight") {
-            baseWorkout.sets = workoutInputs.sets ?? "";
-            baseWorkout.reps = workoutInputs.reps ?? "";
-            baseWorkout.weights = workoutInputs.weights ?? "";
-        }
+    // 4. create the workout object we will store (AFTER calculating calories)
+    const baseWorkout = {
+        workout_title: workoutInputs.workout_title,
+        workoutCategory: workoutCategory,
+        calories: Number(calories) // Now calories is defined
+    };
 
-        // 4. compute calories
-        const calories = caloriesBurnt(
-            workoutInputs,
-            updateWeight,
-            updateHeight,
-            updateAge,
-            updateSex || userLoggedIn.sex,
-            workoutCategory,
-            workoutIntensity
-        );
-        console.log("calories burnt ", calories);
-        if (calories == null || Number.isNaN(calories)) {
-            console.log("caloriesBurnt returned invalid:", calories);
-            setDisplayMessage("Could not calculate calories. Check your inputs (duration, sex, etc).");
-            return;
-        }
+    if (workoutCategory === "weightAndBodyweight") {
+        baseWorkout.sets = workoutInputs.sets ?? "";
+        baseWorkout.reps = workoutInputs.reps ?? "";
+        baseWorkout.weights = workoutInputs.weights ?? "";
+    }
 
-        setBurntCalories(calories); // this plus setCalendar will trigger useEffect
+    // For cardio workouts, store duration
+    if (workoutCategory === "cardio" && workoutInputs.duration) {
+        baseWorkout.duration = workoutInputs.duration;
+    }
 
-        // 5. immutably update calendar
-        setCalendar(prevCalendar => {
-            const newCalendar = Array.isArray(prevCalendar)
+    setBurntCalories(calories); // this plus setCalendar will trigger useEffect
+
+    // 5. immutably update calendar
+    setCalendar(prevCalendar => {
+        const newCalendar = Array.isArray(prevCalendar)
             ? [...prevCalendar]
             : Array(7).fill(null);
 
-            const dayWorkouts = Array.isArray(newCalendar[selectedDay])
+        const dayWorkouts = Array.isArray(newCalendar[selectedDay])
             ? [...newCalendar[selectedDay]]
             : [];
 
-            dayWorkouts.push(baseWorkout);
+        dayWorkouts.push(baseWorkout);
 
-            newCalendar[selectedDay] = dayWorkouts;
-            return newCalendar;
-        });
+        newCalendar[selectedDay] = dayWorkouts;
+        return newCalendar;
+    });
 
-        setDisplayMessage(`Added "${workoutInputs.workout_title}" to ${dayRefs[selectedDay]}.`);
-        }
+    setDisplayMessage(`Added "${workoutInputs.workout_title}" to ${dayRefs[selectedDay]}.`);
+}
 
     return (
         <div className="weekly-calendar">
@@ -173,7 +179,10 @@ function DisplayCalendarSquare({
   const workoutsDisplay = workouts.map((workout, idx) => (
     <div key={`${dayIndex}-${idx}`} className="workout">
       <p>{nameNormalizer(workout.workout_title)}</p>
-
+    
+    <p style={{color: 'green', fontWeight: 'bold'}}>
+        🔥 {workout.calories || 0} calories
+      </p>
       {}
       {workout.workoutCategory === "weightAndBodyweight" && (
         <>
@@ -238,11 +247,18 @@ function AdditionalWorkoutInputs ({workoutInputs, setWorkOutInputs}) {
   const inputs = [];
 
   for (let key in workoutInputs) {
+    let addon = "";
+    if (key === "weights") {
+        addon = "(kg)"
+    }
+    if (key === "duration") {
+        addon = "{mins}"
+    }
     const isText = key === "workout_title";
 
     inputs.push(
       <div key={`input-${key}`}>
-        <label>{nameNormalizer(key)}</label>
+        <label>{`${nameNormalizer(key)} ${addon}`}</label>
         <input
           // we use text + inputMode so we fully control the string
           type="text"
