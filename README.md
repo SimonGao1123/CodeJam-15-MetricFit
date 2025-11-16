@@ -1,86 +1,23 @@
-# CodeJam 15: Health Tracker App
+# Fitness Tracker Website: MetricFit
 CodeJam 15 project by Wonton Warriors. 
 
-## Getting Started
+## Our objective
+Our motivation for building this project came from the idea that people are more likely to stay consistent when they can directly see the progress they have made. We wanted to create a platform that makes tracking progress feel visual, motivating, and clear, so that users can stay inspired as they consistently strive towards their goals.
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+We want to create an intuitive space where users can:
+* Update their physical metrics
+* Log their workout activity
+* See precisely how much progress they are making in terms of calories burned
+* Stay engaged through daily streaks and a leaderboard
 
-### Prerequisites
+## Features
+Users create their accounts with encrypted passwords and input their physical metrics after account registration. MetricFit combines the user’s logged exercises and daily activity with physical body metrics to calculate the calories burned for the day. 
 
-What things you need to install the software and how to install them
+Users can track their fitness journey each day on the website’s built-in weekly calendar. It helps the user visualize:
+* On which days were they most active
+* Where they have been picking up momentum
+* How consistently they have been exercising over the week
 
-```
-Give examples
-```
+The platform incorporates a streak system to reward the user for showing up each day. Watching their exercise streak can give them extra motivation to stay committed to their fitness.
 
-### Installing
-
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
-
-## Authors
-
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+Users can see the Leaderboard to compare progress, challenge each other, and stay accountable. The social aspect and the friendly competitive nature can keep the experience encouraging and motivating.
