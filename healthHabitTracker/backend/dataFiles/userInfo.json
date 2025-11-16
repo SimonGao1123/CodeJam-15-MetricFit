@@ -38,5 +38,45 @@
     ],
     "weeklyCaloriesBurnt": 0,
     "totalCaloriesBurnt": 0
+  },
+  {
+    "username": "ryan",
+    "id": "ryan-2",
+    "streak": 0,
+    "weight": 0,
+    "sex": null,
+    "age": 0,
+    "height": 0,
+    "weeklyCalendar": [
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      []
+    ],
+    "weeklyCaloriesBurnt": 0,
+    "totalCaloriesBurnt": 0
+  },
+  {
+    "username": "3",
+    "id": "3-3",
+    "streak": 0,
+    "weight": 0,
+    "sex": null,
+    "age": 0,
+    "height": 0,
+    "weeklyCalendar": [
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      []
+    ],
+    "weeklyCaloriesBurnt": 0,
+    "totalCaloriesBurnt": 0
   }
 ]

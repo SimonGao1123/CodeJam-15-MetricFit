@@ -2,6 +2,7 @@ import './UserHealthPage.css'
 import { useState } from 'react'
 import {useEffect} from 'react'
 import workoutMETValues from './extraData/workoutMETValues.jsx' // data for wrkouts
+import WeeklyCalendar from './WeeklyCalendar.jsx';
 
 
 const defaultWeightTemplate = {
@@ -142,6 +143,7 @@ function UserHealthPage ({userLoggedIn, setUserLoggedIn, setDisplayLogin}) {
             workoutInputs={workoutInputs}
             setWorkOutInputs={setWorkOutInputs}/>
 
+            <WeeklyCalendar currentDay={currentDate} weeklyCalendar={weeklyCalendar} setWeeklyCalendar={setWeeklyCalendar}/>
             
             <button onClick={() => signOutFunction(setUserLoggedIn, setDisplayLogin)}>Sign out</button>
 

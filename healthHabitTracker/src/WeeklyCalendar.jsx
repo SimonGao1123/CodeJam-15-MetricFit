@@ -1,15 +1,16 @@
 function WeeklyCalendar (currentDay, weeklyCalendar, setWeeklyCalendar) {
+    const currDayIndex = currentDay.getDay();
     const wholeCalendarDisplay = [];
     for (let i = 0; i < 7; i++) {
-        <DisplayCalendarSquare dayIndex={i} currentDay={currentDay} calendarSquareData={weeklyCalendar[i]}/>
+        wholeCalendarDisplay.push(<DisplayCalendarSquare ifCurrDay={i === currDayIndex} dayIndex={i} currentDay={currentDay} calendarSquareData={weeklyCalendar[i]}/>)
     }
 }
-function DisplayCalendarSquare (dayIndex, currentDay, calendarSquareData) {
+function DisplayCalendarSquare ({ifCurrDay, dayIndex, currentDay, calendarSquareData}) {
     // dayIndex is 0 = sunday ... 6 = saturday
     const dayRefs = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     const dayName = dayRefs[dayIndex];
     return (
-        <div className="calendar-square">
+        <div style={{backgroundColor: ifCurrDay ? "yellow" : "white"}} className="calendar-square">
             <p>{dayName}</p>
         </div>
     );
