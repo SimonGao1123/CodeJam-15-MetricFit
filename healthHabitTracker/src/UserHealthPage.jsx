@@ -64,8 +64,42 @@ function UserHealthPage ({userLoggedIn, setUserLoggedIn, setDisplayLogin}) {
     const [workoutInputs, setWorkOutInputs] = useState(null); // none chosen yet
 
     const [displayMessage, setDisplayMessage] = useState(null);
+    const [displayStreak, setDisplayStreak] = useState(0);
+    const [displayTotalBurnt, setDisplayTotalBurnt] = useState(0);
+    function getStreakAndTotalBurnt () {
+        fetch(`http://localhost:3000/getStreakTotalBurned/${userLoggedIn.id}`, {
+            method: "GET"
+        }).then(async response => {
+            const data = await response.json();
+            setDisplayStreak(data.streak);
+            setDisplayTotalBurnt(data.totalCaloriesBurnt);
+        }).catch(error => {
+            console.log("Error in getting streak/totalburned data: ", error);
+        })
+    }
+    useEffect(() => {
+        getStreakAndTotalBurnt();
+    }, [userLoggedIn.id]);
+    const [leaderBoardData, setLeaderBoardData] = useState(null);
+    
+    function getLeaderboard () {
+        fetch(`http://localhost:3000/leaderboard/${userLoggedIn.id}`, {
+            method: "GET"
+        }).then(async response => {
+            const data = await response.json();
+            //username: user.username,
+            //monthlyCaloriesBurnt: Number(user.monthlyCaloriesBurnt) || 0
+            setLeaderBoardData(data);
+        }).catch(error => {
+            console.log("Error in getting leaderboard data: ", error);
+        }) 
+    }
+    useEffect(() => {
+        getLeaderboard();
+    }, [userLoggedIn.id]);
+    console.log(leaderBoardData);
 
-
+    
     function updateClock(streak, weeklyCalendar, userLoggedIn) {
         if (!currentDate) {
             console.log("Current date not loaded yet");
@@ -146,6 +180,7 @@ function UserHealthPage ({userLoggedIn, setUserLoggedIn, setDisplayLogin}) {
             userLoggedIn={userLoggedIn}
             displayMessage={displayMessage}
             setDisplayMessage={setDisplayMessage}
+            setMenuShown={setMenuShown}
             /> : <></>}
 
             <div className='main-boxes'>
@@ -156,6 +191,8 @@ function UserHealthPage ({userLoggedIn, setUserLoggedIn, setDisplayLogin}) {
                         <h2>Hello {userLoggedIn.username}</h2>
                         </div>
                         
+                        <p>Current Streak: {displayStreak}</p>
+                        <p>Total Calories Burned: {displayTotalBurnt}</p>
                         <div className = 'master-buttons'>
                         <button onClick={() => setMenuShown(!menuShown)}>☰ Menu</button>
                         <button onClick={() => updateClock(streak, weeklyCalendar, userLoggedIn)}>Update Day</button>
@@ -188,15 +225,46 @@ function UserHealthPage ({userLoggedIn, setUserLoggedIn, setDisplayLogin}) {
                         />
                     </div>
 
+                    <div id="leaderboard-container">
+                        <h2>Leaderboard:</h2>
+                        <LeaderBoardDisplay leaderBoardData={leaderBoardData}/>
+                    </div>
                 </div>
+                    
+
             </div>
 
+
+            
         </div>
     );
     
 }
+function LeaderBoardDisplay({ leaderBoardData }) {
+  if (!leaderBoardData || leaderBoardData.length === 0) {
+    return <p>No leaderboard data yet.</p>;
+  }
 
-function AttributeForm ({updateHeight, setUpdateHeight, updateWeight, setUpdateWeight, updateSex, setUpdateSex, updateAge, setUpdateAge,userLoggedIn}) {
+  return (
+    <table>
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Monthly Calories Burned</th>
+        </tr>
+      </thead>
+      <tbody>
+        {leaderBoardData.map((user) => (
+          <tr key={user.username}>
+            <td>{user.username}</td>
+            <td>{user.monthlyCaloriesBurnt}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
+function AttributeForm ({updateHeight, setUpdateHeight, updateWeight, setUpdateWeight, updateSex, setUpdateSex, updateAge, setUpdateAge,userLoggedIn,setMenuShown}) {
     function handleUpdateAttributes (e) {
         e.preventDefault();
 
@@ -207,6 +275,7 @@ function AttributeForm ({updateHeight, setUpdateHeight, updateWeight, setUpdateW
         }).catch(error => {
             console.log("Error in adding user information: " + error);
         })
+        setMenuShown(false); 
     }
     return (            
     <div className='overlay-box'>

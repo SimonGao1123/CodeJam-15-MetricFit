@@ -136,8 +136,12 @@ return (
             workoutIntensity={workoutIntensity}
             setWorkoutIntensity={setWorkoutIntensity}
             workoutInputs={workoutInputs}
-            setWorkOutInputs={setWorkOutInputs}
-          />
+            setWorkOutInputs={setWorkOutInputs}/>
+
+            <p>{displayMessage}</p>
+            <button onClick={() => addWorkoutToCalendar()}>Add workout</button>
+            {wholeCalendarDisplay}
+            
         </div>
 
         <p>{displayMessage}</p>
@@ -344,10 +348,12 @@ function caloriesBurnt (workoutInputs, weight, height, age, sex, workoutCategory
         BMR=10*weight+6.25*height-5*age-161;
     }
     const MET = workoutMETValues[workoutCategory][workoutIntensity];
-    return (MET * (BMR/24) * (duration/60)).toFixed(2);
+    return Math.round((MET * (BMR/24) * (duration/60)) / 10) * 10;
     
 
 }
+
+
 const nameNormalizer = (name) => {
     return name.split("_").map((word) => {
         return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
