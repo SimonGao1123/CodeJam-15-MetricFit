@@ -4,12 +4,12 @@ import workoutMETValues from './extraData/workoutMETValues.jsx';
 const defaultWeightTemplate = {
         sets: "",
         reps: "",
-        "weights (kg)": "",
-        "duration (mins)": "",
+        weights: "",
+        duration: "",
         workout_title: ""
     };
     const defaultCardioTemplate = {
-        "duration (mins)": "",
+        duration: "",
         workout_title: ""
     };
 

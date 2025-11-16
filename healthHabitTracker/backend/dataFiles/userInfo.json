@@ -9,14 +9,19 @@
     "height": 20,
     "weeklyCalendar": [
       [],
-      [],
+      [
+        {
+          "workout_title": "32",
+          "workoutCategory": "cardio"
+        }
+      ],
       [],
       [],
       [],
       [],
       []
     ],
-    "weeklyCaloriesBurnt": 0,
-    "totalCaloriesBurnt": 0
+    "weeklyCaloriesBurnt": -816.47,
+    "totalCaloriesBurnt": -816.47
   }
 ]
