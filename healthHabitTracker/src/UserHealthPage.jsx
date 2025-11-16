@@ -45,21 +45,28 @@ function UserHealthPage ({userLoggedIn, setUserLoggedIn, setDisplayLogin}) {
 
     const [pastDate, updatePastDate] = useState(null);
 
-    function getPrevTime () {
-    fetch("http://localhost:3000/getDate", {
-            method: "GET",
-        }).then(res => res.text())
-        .then(data => updatePastDate(data))
-        .catch(error => {
-            console.log("Error in adding user information: " + error);
-            return null;
-        })   
+  useEffect(() => {
+    async function getPrevTime() {
+      try {
+        console.log("Calling /getDate...");
+        const res = await fetch("http://localhost:5000/getDate", { method: "GET" });
+        console.log("Status:", res.status);
+        const text = await res.text();
+        console.log("Received:", text);
+        updatePastDate(text);   // store it in state
+      } catch (err) {
+        console.log("Fetch error:", err);
+      }
     }
+
+    getPrevTime();
+  }, []);  // empty deps -> runs once when component mounts
+
+  useEffect(() => {
+    console.log("pastDate updated:", pastDate);
+  }, [pastDate]);
     
-    useEffect(() => {
-        getPrevTime();
-    }, [])
-    console.log(pastDate);
+    
 
    // function askAI () {
     //     fetch("http://localhost:3000/api/chat", {
@@ -95,7 +102,8 @@ function UserHealthPage ({userLoggedIn, setUserLoggedIn, setDisplayLogin}) {
             
 
             <button onClick={() => signOutFunction(setUserLoggedIn, setDisplayLogin)}>Sign out</button>
-
+            
+            <p>{pastDate}</p>
             
 
         </>
