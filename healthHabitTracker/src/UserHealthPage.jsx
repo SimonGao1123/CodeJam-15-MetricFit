@@ -41,9 +41,26 @@ function writeDateFile (newDate) {
 }
 
 function UserHealthPage ({userLoggedIn, setUserLoggedIn, setDisplayLogin}) {
-    const [currentDate, setCurrentDate] = useState(new Date());
-    const [weeklyCalendar, setWeeklyCalendar] = useState(userLoggedIn.weeklyCalendar); 
-    const {weight, sex, age, height} = userLoggedIn;
+    const [currentDate, setCurrentDate] = useState();
+    function getPrevTime () {
+        fetch("http://localhost:3000/getDate", {
+                method: "GET",
+        }).then(res => res.text())
+        .then(data => setCurrentDate(new Date(data.trim())))
+        .catch(error => {
+            console.log("Error in adding user information: " + error);
+            return null;
+        })   
+    }
+    
+    useEffect(() => {
+        getPrevTime();
+    }, [])
+
+    console.log("weekly calendar: ", userLoggedIn.weeklyCalendar);
+    const {weight, sex, age, height, weeklyCalendar} = userLoggedIn;
+    
+    const [calendar, setCalendar] = useState(weeklyCalendar); 
 
     // const [aiMessage, setAIMessage] = useState("");
     const [updateHeight, setUpdateHeight] = useState(height);
@@ -59,66 +76,55 @@ function UserHealthPage ({userLoggedIn, setUserLoggedIn, setDisplayLogin}) {
 
     const [displayMessage, setDisplayMessage] = useState(null);
 
+    console.log("Current date: " + currentDate);
     console.log(workoutInputs)
 
     function updateClock() {
-        var tempDate = new Date();
-        var tempDate = new Date(tempDate.getFullYear(), tempDate.getMonth(), tempDate.getDate());
-        if (currentDate.getMonth() != tempDate.getMonth() || currentDate.getFullYear() != currentDate.getFullYear())
-            {
-                // updateLeaderboard()
-            }
-        var startWeek1 = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() - currentDate.getDay())
-        var startWeek2 = new Date(tempDate.getFullYear(), tempDate.getMonth(), tempDate.getDate() - currentDate.getDay)
-        if (startWeek1.getTime() === startWeek2.getTime())
-            {
-                // updateStreak()
-            }
+        if (!currentDate) {
+            console.log("Current date not loaded yet");
+            return;
+        }
+
+        let tempDate = new Date();
+        tempDate = new Date(tempDate.getFullYear(), tempDate.getMonth(), tempDate.getDate());
+
+        // ⚠️ This line has a bug too:
+        // currentDate.getFullYear() != currentDate.getFullYear()
+        // should be comparing tempDate
+        if (
+        currentDate.getMonth() !== tempDate.getMonth() ||
+        currentDate.getFullYear() !== tempDate.getFullYear()
+        ) {
+            // updateLeaderboard()
+        }
+
+        const startWeek1 = new Date(
+        currentDate.getFullYear(),
+        currentDate.getMonth(),
+        currentDate.getDate() - currentDate.getDay()
+        );
+
+        const startWeek2 = new Date(
+        tempDate.getFullYear(),
+        tempDate.getMonth(),
+        tempDate.getDate() - tempDate.getDay()   // you forgot () on getDay before
+        );
+
+        if (startWeek1.getTime() === startWeek2.getTime()) {
+            // updateStreak()
+        }
+
         setCurrentDate(tempDate);
         writeDateFile(tempDate);
-        var dayWeek = currentDate.getDay(); // Sunday - Saturday : 0 - 6
-        var dayMonth = currentDate.getDate(); // 1 - 31
+        
+        const dayWeek = currentDate.getDay();
+        const dayMonth = currentDate.getDate();
     }
-
-
-
-
-    // function askAI () {
-    const [pastDate, updatePastDate] = useState(null);
-
-    function getPrevTime () {
-    fetch("http://localhost:3000/getDate", {
-            method: "GET",
-        }).then(res => res.text())
-        .then(data => updatePastDate(data))
-        .catch(error => {
-            console.log("Error in adding user information: " + error);
-            return null;
-        })   
-    }
-    
-    useEffect(() => {
-        getPrevTime();
-    }, [])
-    console.log(pastDate);
-
-   // function askAI () {
-    //     fetch("http://localhost:3000/api/chat", {
-    //         method: "POST",
-    //         headers: {"Content-Type": "application/json"},
-    //         body: JSON.stringify({message: aiMessage})
-    //     }).then(async response => {
-    //         const data = await response.json();
-    //         console.log(data.reply);
-    //     }).catch(error => {
-    //         console.log("Error in receiving gemini response: " + error);
-    //     })
-    // }
 
 
     return (
         <>
-            {/* <button onClick={() => updateClock()}>Update Day</button> */}
+            <button onClick={() => updateClock()}>Update Day</button>
             <h2>Hello {userLoggedIn.username}</h2>
 
             <button onClick={() => setMenuShown(!menuShown)}>☰</button>
@@ -143,7 +149,7 @@ function UserHealthPage ({userLoggedIn, setUserLoggedIn, setDisplayLogin}) {
             workoutInputs={workoutInputs}
             setWorkOutInputs={setWorkOutInputs}/>
 
-            <WeeklyCalendar currentDay={currentDate} weeklyCalendar={weeklyCalendar} setWeeklyCalendar={setWeeklyCalendar}/>
+            <WeeklyCalendar currentDay={currentDate} calendar={calendar} setCalendar={setCalendar}/>
             
             <button onClick={() => signOutFunction(setUserLoggedIn, setDisplayLogin)}>Sign out</button>
 
@@ -264,20 +270,20 @@ function AttributeForm ({updateHeight, setUpdateHeight, updateWeight, setUpdateW
     return (<form onSubmit={handleUpdateAttributes}>
             <h3>Physical Attributes:</h3>
             
-            <label for="updateheight">Height (cm): </label>
+            <label htmlFor="updateheight">Height (cm): </label>
             <input type="text" id="updateheight" value={updateHeight} onChange={(e) => {if(!isNaN(e.target.value))setUpdateHeight(Number(e.target.value))}}/>
             
-            <label for="updateweight">Weight (kg): </label>
+            <label htmlFor="updateweight">Weight (kg): </label>
             <input type="text" id="updateweight" value={updateWeight} onChange={(e) => {if(!isNaN(e.target.value))setUpdateWeight(Number(e.target.value))}}/>
             
-            <label for="updatesex">Gender: </label>
+            <label htmlFor="updatesex">Gender: </label>
             <select id="updatesex" value={updateSex} onChange={(e)=>setUpdateSex(e.target.value)}>
                 <option selected disabled hidden value="">Select Option:</option>
                 <option value="male">Male</option>
                 <option value="female">Female</option>
             </select>
             
-            <label for="updateage">Age (years): </label>
+            <label htmlFor="updateage">Age (years): </label>
             <input type="number" id="updateage" value={updateAge} onChange={(e) => {if(!isNaN(e.target.value) || e.target.value < 0)setUpdateAge(Number(e.target.value))}}/>
             
             <button type="submit">Update</button>

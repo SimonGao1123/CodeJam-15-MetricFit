@@ -23,5 +23,25 @@
     "username": "3",
     "password": "0070929aaaae28dbecdde8f607509399:cc68bd3dc1285bf11f16e9fc2a7729bc3d54d0fcd73a8731e8c3f49896fd9426d9d14c1527c01c4406d0ee25183ff5b0835cf2304fb9e352f2554115c77a9038",
     "id": "3-3"
+  },
+  {
+    "username": "chin",
+    "password": "774a8b7f39587d7e889147ff0fbac020:67a38af2f2eb98c5898fa98f72d0def8252e3be156b71918aaeeaab8e9c40c0ba45e1ef26024190fa3169b48c577ccc1f835ee5293d834fa705928aaaf4a27ef",
+    "id": "chin-1"
+  },
+  {
+    "username": "1234567890",
+    "password": "3100db129a87586a6984af4e828ef6c8:06c4d7a217fdab6734f5ae8f1f604e7be3aee420aa52463a71ea785f5fdd6fd36769374838dca8ae929deaa448379e951ae248e8bdbc9943d0dfe60668b66d41",
+    "id": "1234567890-2"
+  },
+  {
+    "username": "0",
+    "password": "5a95f9f42c3d674901317f13b7bc0c0b:a08d3227065946e946521d6674d0a4a3a0dcb36b2c6a6179a8a0e1a441f0df9ed99fa90c35c62b5909d0f7745bc7b3d4f54d5b002618e979da05dbc9d88433b2",
+    "id": "0-1"
+  },
+  {
+    "username": "simon223",
+    "password": "cbe30d3ae84d36e6b4e8520fb71a915c:63070a6644caec94904ddb67f304100d307e9fb91de2cc7eb332331a1366aa76dad0c7769936b94a527fc01fdc2041d3c6af9f471d74843551d73423c8b812d9",
+    "id": "simon223-1"
   }
 ]
